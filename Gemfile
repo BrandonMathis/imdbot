@@ -2,4 +2,6 @@ source 'https://rubygems.org'
 
 gem 'redditkit'
 gem 'redis'
-gem 'whenever'
+gem 'rspec'
+gem 'awesome_print'
+gem 'imdb'
