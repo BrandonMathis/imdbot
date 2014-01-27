@@ -4,7 +4,7 @@ describe Imdbot do
   let(:bot) { Imdbot.new }
   describe '.extract_movie_titles' do
     context 'with desireable title' do
-      let(:link_title) { "This this the 'Movie Title' hello 'Another Movie Title' and \"A Double Quote Movie\"" }
+      let(:link_title) { "This this the 'Movie Title' hello 'Another Movie Title'" }
 
       it 'gets both movie titles' do
         bot.extract_movie_titles(link_title).should include 'Movie Title'
@@ -16,8 +16,8 @@ describe Imdbot do
       end
     end
 
-    context 'when there are quotes used for conjunction' do
-      let(:link_title) { "Scorsese's uses of X's in The Departed to foreshadow characters eventual death" }
+    context 'when multiple conjugations could be interprited as a movie title' do
+      let(:link_title) { "Scorsese's uses of x's in The Departed to foreshadow characters eventual death" }
 
       it 'wont use that as a movie title' do
         bot.extract_movie_titles(link_title).should  == []
@@ -37,6 +37,14 @@ describe Imdbot do
 
       it 'will remove the . from the end of the title' do
         bot.extract_movie_titles(link_title).should include 'The Warriors'
+      end
+    end
+
+    context'with quote in the title' do
+      let(:link_title) { '"When you make a film that hits the president between the eyes and could shift an election, you become a target," conservative filmmaker Dennis Michael Lynch told Fox News, referring to D\'Souza\'s "2016: Obama\'s America."' }
+
+      it 'will get only the movie title' do
+        bot.extract_movie_titles(link_title).should include "2016: Obama\'s America"
       end
     end
   end
