@@ -4,6 +4,10 @@ describe Imdbot::Bot do
   let(:bot) { Imdbot::Bot.new }
 
   describe '.extract_movie_titles' do
+    before do
+      RedditKit::Client.stub(:new)
+    end
+
     context 'with desireable title' do
       let(:link_title) { "This this the 'Movie Title' hello 'Another Movie Title'" }
 

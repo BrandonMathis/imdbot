@@ -3,7 +3,7 @@ module Imdbot
     attr_accessor :username
     attr_accessor :client
 
-    def new
+    def initialize
       settings = YAML.load_file('config/settings.yml')
       self.username = settings['username']
       self.client = RedditKit::Client.new(username, settings['password'])
@@ -14,6 +14,15 @@ module Imdbot
         REDIS.set("imdbot:links:#{l.id}", l.permalink)
         REDIS.expire(l.id, 1209600) # expire in 2 weeks
         comment_with_imdb_link(l)
+      end
+    end
+
+    def comment_with_imdb_link(l)
+      extract_movie_titles(l.title).each do |title|
+        puts l.title
+        imdb_title = search_imdb_movies(title).first.title
+        puts "I think this movie is #{imdb_title.blue} I searched #{title.red.underline} (#{confidence(imdb_title, title).to_s}% confidence)"
+        puts ''
       end
     end
 
