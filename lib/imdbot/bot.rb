@@ -40,7 +40,7 @@ module Imdbot
 
       # Remove non-chars from end of movie title
       # - punctuation seems to mess up IMDB search
-      movie_titles.map! { |title| title.gsub(/\W$/, '') }
+      movie_titles.map! { |title| title.gsub(/[\.,:*]$/, '') }
 
       # Reject potential title if there is not a single uppercase char
       # - this is minly for weeding out titles with multiple conjugations
@@ -52,13 +52,19 @@ module Imdbot
     end
 
     def confidence(imdb_title, query)
-      x = imdb_title.split.size.to_f
-      y = query.split.size.to_f
-      if x > y
-        return (y / x) * 100
+      confidence = 100
+      imdb_title.gsub!(/\(\d+\)/, '')
+      case imdb_title
+      when /([\w]{1}[\.]{1})/ # Split for abbreviation titles like 'R.I.P.D'
+        imdb_title = imdb_title.split('.')
       else
-        return (x / y) * 100
+        imdb_title = imdb_title.split.map!{ |word| word.downcase }
       end
+      query = query.split.map!{ |word| word.downcase }
+      confidence -= (imdb_title - query).size * 10
+      confidence -= (query - imdb_title).size * 10
+      confidence = 0 if confidence < 0
+      confidence
     end
   end
 end

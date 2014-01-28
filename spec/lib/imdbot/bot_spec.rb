@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Imdbot::Bot do
   let(:bot) { Imdbot::Bot.new }
 
-  describe '.extract_movie_titles' do
-    before do
-      RedditKit::Client.stub(:new)
-    end
+  before do
+    RedditKit::Client.stub(:new)
+  end
 
+  describe '#extract_movie_titles' do
     context 'with desireable title' do
       let(:link_title) { "This this the 'Movie Title' hello 'Another Movie Title'" }
 
@@ -45,11 +45,59 @@ describe Imdbot::Bot do
       end
     end
 
-    context'with quote in the title' do
+    context 'with quote in the title' do
       let(:link_title) { '"When you make a film that hits the president between the eyes and could shift an election, you become a target," conservative filmmaker Dennis Michael Lynch told Fox News, referring to D\'Souza\'s "2016: Obama\'s America."' }
 
       it 'will get only the movie title' do
         bot.extract_movie_titles(link_title).should include "2016: Obama\'s America"
+      end
+    end
+
+    context 'with dates in parens' do
+      let(:link_title) { 'Just watched the movie "Blue Caprice (2013)" and had some indifferent feelings towards the film.' }
+
+      it 'will get the movies title and date' do
+        bot.extract_movie_titles(link_title).should include "Blue Caprice (2013)"
+      end
+    end
+  end
+
+  describe '#confidence' do
+    subject { bot.confidence(imdb_title, query) }
+
+    describe 'with exact match' do
+      let(:imdb_title) { "Movie Title (2000)" }
+      let(:query) { "Movie Title" }
+
+      it 'give you 100 confidence' do
+        subject.should == 100
+      end
+    end
+
+    describe 'with 1 descripancy' do
+      let(:imdb_title) { "The Movie Title (2000)" }
+      let(:query) { "Movie Title" }
+
+      it 'give you 90 confidence' do
+        subject.should == 90
+      end
+    end
+
+    describe 'Movie is abbreviation' do
+      let(:imdb_title) { "R.I.P.D. (2000)" }
+      let(:query) { "we r something" }
+
+      it 'give you 20 confidence' do
+        subject.should == 20
+      end
+    end
+
+    describe 'Movie is singlename' do
+      let(:imdb_title) { "Godzilla (I) (1998)" }
+      let(:query) { "Gojira" }
+
+      it 'give you 20 confidence' do
+        subject.should == 70
       end
     end
   end
