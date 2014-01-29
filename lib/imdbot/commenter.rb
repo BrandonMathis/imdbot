@@ -13,14 +13,12 @@ module Imdbot
       extract_movie_titles(l.title).each do |title|
         movie = Imdbot::Movie.new(title, l)
         movie.save_to_redis
-        comment(movie.to_comment)
+        comment(l, movie.to_comment)
       end
     end
 
-    def self.comment(body)
-      File.open("tmp/comments/#{Time.now.to_f.to_s}.md", 'w') do |f|
-        f.write body
-      end
+    def self.comment(l, body)
+      @@client.submit_comment(l, body)
     end
 
     # Please explain yourself if you add a regex!!!
