@@ -35,7 +35,6 @@ module Imdbot
 >#{plot}
 
 *Will delete on comment score of -1 or less*  
-*/u/#{reddit_link.author} can delete this comment by responding with 'delete'*  
 eos
     end
 
