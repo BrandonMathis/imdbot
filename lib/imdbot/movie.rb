@@ -22,6 +22,20 @@ module Imdbot
     end
 
     def to_comment
+<<-eos
+##[#{imdb.title}](#{imdb.url}):
+
+>#{plot}
+
+*Will delete on comment score of -1 or less*  
+*/u/#{reddit_link.author} can delete this comment by responding with 'delete'*  
+eos
+    end
+
+    def plot
+      return imdb.plot_summary if imdb.plot_summary
+      return '[](#s "' + imdb.plot + '")' if imdb.plot
+      "Sorry, there is no plot summary available yet as of #{Time.now}!"
     end
 
     def imdb

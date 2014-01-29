@@ -5,8 +5,8 @@ module Imdbot
 
     def self.perform(link_id)
       @@settings = YAML.load_file('config/settings.yml')
-      @@client = RedditKit::Client.new(settings['username'], settings['password'])
-      comment_with_movie_details client.link(link_id)
+      @@client = RedditKit::Client.new(@@settings['username'], @@settings['password'])
+      comment_with_movie_details @@client.link(link_id)
     end
 
     def self.comment_with_movie_details(l)
@@ -14,6 +14,12 @@ module Imdbot
         movie = Imdbot::Movie.new(title, l)
         movie.save_to_redis
         comment(movie.to_comment)
+      end
+    end
+
+    def self.comment(body)
+      File.open("tmp/comments/#{Time.now.to_f.to_s}.md", 'w') do |f|
+        f.write body
       end
     end
 
