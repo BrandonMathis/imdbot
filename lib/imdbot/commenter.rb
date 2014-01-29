@@ -4,19 +4,16 @@ module Imdbot
     @queue = :reddit_movie_post
 
     def self.perform(link_id)
-      settings = YAML.load_file('config/settings.yml')
-      client = RedditKit::Client.new(settings['client'], settings['password'])
-      l = client.link(link_id)
-      comment_with_movie_details(l)
+      @@settings = YAML.load_file('config/settings.yml')
+      @@client = RedditKit::Client.new(settings['username'], settings['password'])
+      comment_with_movie_details client.link(link_id)
     end
 
     def self.comment_with_movie_details(l)
       extract_movie_titles(l.title).each do |title|
-        log = Logger.new('log/info.log')
-        log.info "#{l.title}"
-        imdb_title = search_imdb_movies(title).first.title
-        log.info "I think this movie is #{imdb_title.blue} I searched #{title.red.underline} (#{confidence(imdb_title, title).to_s}% confidence)\n"
-        log.close
+        movie = Imdbot::Movie.new(title, l)
+        movie.save_to_redis
+        comment(movie.to_comment)
       end
     end
 
@@ -41,24 +38,5 @@ module Imdbot
       movie_titles.select { |title| title =~ /[A-Z]+/ }
     end
 
-    def self.search_imdb_movies(query_string)
-      Imdb::Search.new(query_string).movies
-    end
-
-    def self.confidence(imdb_title, query)
-      confidence = 100
-      imdb_title.gsub!(/\(\d+\)/, '')
-      case imdb_title
-      when /([\w]{1}[\.]{1})/ # Split for abbreviation titles like 'R.I.P.D'
-        imdb_title = imdb_title.split('.')
-      else
-        imdb_title = imdb_title.split.map!{ |word| word.downcase }
-      end
-      query = query.split.map!{ |word| word.downcase }
-      confidence -= (imdb_title - query).size * 10
-      confidence -= (query - imdb_title).size * 10
-      confidence = 0 if confidence < 0
-      confidence
-    end
   end
 end

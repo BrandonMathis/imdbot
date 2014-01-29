@@ -59,44 +59,4 @@ describe Imdbot::Bot do
       end
     end
   end
-
-  describe '#confidence' do
-    subject { Imdbot::Commenter.confidence(imdb_title, query) }
-
-    describe 'with exact match' do
-      let(:imdb_title) { "Movie Title (2000)" }
-      let(:query) { "Movie Title" }
-
-      it 'give you 100 confidence' do
-        subject.should == 100
-      end
-    end
-
-    describe 'with 1 descripancy' do
-      let(:imdb_title) { "The Movie Title (2000)" }
-      let(:query) { "Movie Title" }
-
-      it 'give you 90 confidence' do
-        subject.should == 90
-      end
-    end
-
-    describe 'Movie is abbreviation' do
-      let(:imdb_title) { "R.I.P.D. (2000)" }
-      let(:query) { "we r something" }
-
-      it 'give you 20 confidence' do
-        subject.should == 20
-      end
-    end
-
-    describe 'Movie is singlename' do
-      let(:imdb_title) { "Godzilla (I) (1998)" }
-      let(:query) { "Gojira" }
-
-      it 'give you 20 confidence' do
-        subject.should == 70
-      end
-    end
-  end
 end
