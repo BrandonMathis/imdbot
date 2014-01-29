@@ -1,3 +1,5 @@
+require 'capistrano/bundler'
+
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
@@ -18,16 +20,22 @@ namespace :deploy do
     # As the new processes start up, calls back to before_fork (in
     # config/unicorn.conf) will read the .oldbin pid file and signal the
     # old process to shut down.
-    run "kill -s USR2 `cat #{UNICORN_PID}`"
+    on 'brandonmathis.me' do
+      execute "kill -s USR2 `cat #{UNICORN_PID}`"
+    end
   end
 
   task :start do
     # Start production Unicorn
-    run "cd #{current_path} ; #{UNICORN}"
+    on 'brandonmathis.me' do
+      execute "cd #{current_path} ; #{UNICORN}"
+    end
   end
 
   task :stop do
     # Shut down the Unicorn server
-    run "kill -s QUIT `cat #{UNICORN_PID}`"
+    on 'brandonmathis.me' do
+      execute "kill -s QUIT `cat #{UNICORN_PID}`"
+    end
   end
 end
