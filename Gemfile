@@ -2,11 +2,13 @@ source 'https://rubygems.org'
 
 gem 'redditkit'
 gem 'redis'
-gem 'rspec'
-gem 'awesome_print'
 gem 'imdb'
-gem 'colored'
 gem 'resque'
 gem 'rake'
-gem 'vcr'
-gem 'webmock', '< 1.16.0'
+gem 'awesome_print'
+
+group :test do
+  gem 'rspec'
+  gem 'webmock', '< 1.16.0'
+  gem 'vcr'
+end
