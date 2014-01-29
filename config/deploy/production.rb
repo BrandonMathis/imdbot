@@ -33,6 +33,7 @@ namespace :deploy do
     on 'brandonmathis.me' do
       execute "ln -nfs #{shared_path}/tmp/ #{release_path}/tmp"
       execute "ln -nfs #{shared_path}/log/ #{release_path}/log"
+      execute "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
     end
   end
 
