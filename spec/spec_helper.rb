@@ -6,7 +6,7 @@ require 'vcr'
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
-  c.default_cassette_options = { :record => :new_episodes }
+  c.default_cassette_options = { :record => :all }
   c.configure_rspec_metadata!
   c.filter_sensitive_data('<PASSWORD>') { YAML.load_file('config/settings.yml')['password'] }
 end

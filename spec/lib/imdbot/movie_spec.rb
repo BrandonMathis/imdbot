@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Imdbot::Movie, :vcr do
   let(:settings) { YAML.load_file('config/settings.yml') }
   let(:client) { RedditKit::Client.new(settings['username'], settings['password']) }
-  let(:reddit_link) { client.links('movies').first }
+  let!(:reddit_link) { client.link('t3_1wdeb1') }
 
   subject { Imdbot::Movie.new('Star Wars', reddit_link) }
 
