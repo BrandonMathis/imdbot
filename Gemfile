@@ -8,6 +8,7 @@ gem 'rake'
 gem 'awesome_print'
 gem 'whenever'
 gem 'capistrano', '~> 3.1.0'
+gem 'unicorn'
 
 group :test do
   gem 'rspec'
