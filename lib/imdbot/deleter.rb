@@ -9,7 +9,7 @@ module Imdbot
         link_id = REDIS.hget(k, 'reddit_link_id')
         comment = @@client.comment(comment_id)
         link = @@client.link(link_id)
-        @@client.delete(comment) if (comment.attributes[:ups] - comment.attributes[:downs]) <= 0
+        @@client.delete(comment) if (comment.attributes[:ups] - comment.attributes[:downs]) <= -1
       end
     end
   end
