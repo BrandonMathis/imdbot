@@ -1,3 +1,4 @@
 config/settings.yml
 vendor/ruby
 log
+tmp
