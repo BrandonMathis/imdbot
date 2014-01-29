@@ -17,6 +17,9 @@ GEM
     capistrano-bundler (1.1.1)
       capistrano (~> 3.0)
       sshkit (>= 1.2.0)
+    capistrano-rbenv (2.0.2)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     chronic (0.10.2)
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
@@ -101,6 +104,7 @@ DEPENDENCIES
   awesome_print
   capistrano (~> 3.1.0)
   capistrano-bundler
+  capistrano-rbenv (~> 2.0)
   imdb
   rake
   redditkit

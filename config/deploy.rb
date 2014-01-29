@@ -1,3 +1,4 @@
+require 'capistrano/rbenv'
 require 'capistrano/bundler'
 
 # config valid only for Capistrano 3.1
