@@ -6,6 +6,7 @@ gem 'imdb'
 gem 'resque'
 gem 'rake'
 gem 'awesome_print'
+gem 'whenever'
 
 group :test do
   gem 'rspec'
