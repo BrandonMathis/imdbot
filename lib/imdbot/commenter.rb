@@ -12,13 +12,13 @@ module Imdbot
     def self.comment_with_movie_details(l)
       extract_movie_titles(l.title).each do |title|
         movie = Imdbot::Movie.new(title, l)
-        movie.save_to_redis
-        comment(l, movie.to_comment)
+        comment(movie)
       end
     end
 
-    def self.comment(l, body)
-      @@client.submit_comment(l, body)
+    def self.comment(movie)
+      movie.comment = @@client.submit_comment(movie.reddit_link, movie.to_comment)
+      movie.save_to_redis
     end
 
     # Please explain yourself if you add a regex!!!

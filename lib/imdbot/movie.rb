@@ -2,6 +2,11 @@ module Imdbot
   class Movie
     attr_accessor :title
     attr_accessor :reddit_link
+    attr_accessor :comment
+
+    def self.redis_key_namespace
+      "imdbot:movies"
+    end
 
     def initialize(title, reddit_link)
       @title = title
@@ -15,10 +20,12 @@ module Imdbot
       REDIS.hset(redis_key, 'imdb_title', imdb.title)
       REDIS.hset(redis_key, 'imdb_url', imdb.url)
       REDIS.hset(redis_key, 'confidence', confidence)
+      REDIS.hset(redis_key, 'reddit_comment_id', comment.full_name)
+      REDIS.hset(redis_key, 'reddit_link_id', reddit_link.full_name)
     end
 
     def redis_key
-      @redis_key ||= "imdbot:movies:#{SecureRandom.hex.to_s}"
+      @redis_key ||= "#{Imdbot::Movie.redis_key_namespace}:#{SecureRandom.hex.to_s}"
     end
 
     def to_comment
