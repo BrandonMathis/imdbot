@@ -26,9 +26,16 @@ UNICORN = <<-COMMAND.gsub(/\s+/, ' ')
     --config-file config/unicorn.rb
 COMMAND
 
-# TODO: symlink log and pids file
+
 
 namespace :deploy do
+  after :finishing, :symlink do
+    on 'brandonmathis.me' do
+      execute "ln -nfs #{shared_path}/tmp/ #{release_path}/tmp"
+      execute "ln -nfs #{shared_path}/log/ #{release_path}/log"
+    end
+  end
+
   task :restart do
     # Signals the Unicorn server to start a new master process, loading
     # the new release of the codebase. Unicorn will suffix the pid file
