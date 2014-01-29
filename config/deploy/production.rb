@@ -1,6 +1,3 @@
-# For Whenever gem to build cron tasks
-SSHKit.config.command_map[:whenever] = "bundle exec whenever"
-
 set :ssh_options, {user: 'bemathis', port: 44}
 set :user, 'bemathis'
 
