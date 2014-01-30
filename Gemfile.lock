@@ -1,3 +1,13 @@
+GIT
+  remote: git@github.com:BrandonMathis/RedditKit.rb.git
+  revision: 230e215c911efdcc4fc1a961cf8c3b606a2bccbc
+  branch: faraday_fix
+  specs:
+    redditkit (1.0.1)
+      faraday (~> 0.8)
+      htmlentities (~> 4.3)
+      multi_json (~> 1.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,10 +56,6 @@ GEM
       rack
     raindrops (0.12.0)
     rake (10.1.1)
-    redditkit (1.0.1)
-      faraday (~> 0.8)
-      htmlentities (~> 4.3)
-      multi_json (~> 1.8)
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -107,7 +113,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0)
   imdb
   rake
-  redditkit
+  redditkit!
   redis
   resque
   rspec
