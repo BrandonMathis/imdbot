@@ -39,6 +39,7 @@ module Imdbot
                                       headers: { "X-Mashape-Authorization" => ::SETTINGS['token'] },
                                       parameters: { "title" => cleanup(imdb.title) }).body['result']
       end
+      @metacritic
     end
 
     def metacritic_score

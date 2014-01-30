@@ -69,6 +69,10 @@ describe Imdbot::Movie, :vcr do
     it 'gives the metacritic score' do
       subject.metacritic['score'].should == '94'
     end
+
+    it 'gives a metacritic score link' do
+      subject.metacritic_score.should_not be_nil
+    end
   end
 
   describe '#to_comment' do
