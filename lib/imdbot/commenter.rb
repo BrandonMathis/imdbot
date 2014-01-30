@@ -12,7 +12,7 @@ module Imdbot
     def self.comment_with_movie_details(l)
       extract_movie_titles(l.title).each do |title|
         movie = Imdbot::Movie.new(title, l)
-        comment(movie)
+        comment(movie) if movie.confidence >= 80
       end
     end
 
