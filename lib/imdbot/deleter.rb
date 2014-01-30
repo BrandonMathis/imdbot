@@ -2,8 +2,7 @@ require 'pp'
 module Imdbot
   class Deleter
     def scan
-      @@settings = YAML.load_file('config/settings.yml')
-      @@client = RedditKit::Client.new(@@settings['username'], @@settings['password'])
+      @@client = RedditKit::Client.new(::SETTINGS['username'], ::SETTINGS['password'])
       REDIS.keys("#{Imdbot::Movie.redis_key_namespace}:*").each do |k|
         comment_id = REDIS.hget(k, 'reddit_comment_id')
         link_id = REDIS.hget(k, 'reddit_link_id')

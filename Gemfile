@@ -11,6 +11,7 @@ gem 'capistrano', '~> 3.1.0'
 gem 'unicorn'
 gem 'capistrano-bundler'
 gem 'capistrano-rbenv', '~> 2.0'
+gem 'unirest'
 
 group :test do
   gem 'rspec'

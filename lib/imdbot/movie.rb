@@ -28,11 +28,22 @@ module Imdbot
       @redis_key ||= "#{Imdbot::Movie.redis_key_namespace}:#{SecureRandom.hex.to_s}"
     end
 
+    def metacritic
+      @metacritic ||= Unirest::post( "https://byroredux-metacritic.p.mashape.com/find/movie", headers: { "X-Mashape-Authorization" => ::SETTINGS['token'] }, parameters: { "title" => imdb.title.gsub(/\s\(\d+\)/, '') }).body['result']
+    end
+
+    def metacritic_score
+      return "[#{metacritic['score']}](#{metacritic['url']})" if metacritic
+      '*not found*'
+    end
+
     def to_comment
 <<-eos
 ##[#{imdb.title}](#{imdb.url}):
 
 >#{plot}
+
+Metacritic Score: #{metacritic_score}
 
 *Will delete on comment score of -1 or less*  
 eos
@@ -58,7 +69,7 @@ eos
 
     def confidence
       confidence = 100
-      imdb_title = imdb.title.gsub(/\(\d+\)/, '') # Remove Date
+      imdb_title = imdb.title.gsub(/\(.+\)/, '') # Remove Date
       case imdb_title
       when /([\w]{1}[\.]{1})/ # Split for abbreviation titles like 'R.I.P.D'
         imdb_title_words = imdb_title.split('.')

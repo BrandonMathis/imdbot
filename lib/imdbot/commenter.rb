@@ -4,21 +4,30 @@ module Imdbot
     @queue = :reddit_movie_post
 
     def self.perform(link_id)
-      @@settings = YAML.load_file('config/settings.yml')
-      @@client = RedditKit::Client.new(@@settings['username'], @@settings['password'])
+      @@client = RedditKit::Client.new(::SETTINGS['username'], ::SETTINGS['password'])
       comment_with_movie_details @@client.link(link_id)
     end
 
     def self.comment_with_movie_details(l)
       extract_movie_titles(l.title).each do |title|
         movie = Imdbot::Movie.new(title, l)
-        comment(movie) if movie.confidence >= 80
+        if ::SETTINGS['live'] = true
+          comment(movie) if movie.confidence >= 80
+        else
+          post_to_file(movie) if movie.confidence >= 80
+        end
       end
     end
 
     def self.comment(movie)
       movie.comment = @@client.submit_comment(movie.reddit_link, movie.to_comment)
       movie.save_to_redis
+    end
+
+    def self.post_to_file(movie)
+      File.open("tmp/comments/#{Time.now.to_f}.md", 'w') do |f|
+        f.write movie.to_comment
+      end
     end
 
     # Please explain yourself if you add a regex!!!
@@ -41,6 +50,5 @@ module Imdbot
       # - this is minly for weeding out titles with multiple conjugations
       movie_titles.select { |title| title =~ /[A-Z]+/ }
     end
-
   end
 end

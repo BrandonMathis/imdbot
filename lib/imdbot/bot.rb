@@ -4,9 +4,8 @@ module Imdbot
     attr_accessor :client
 
     def initialize
-      settings = YAML.load_file('config/settings.yml')
-      self.username = settings['username']
-      self.client = RedditKit::Client.new(username, settings['password'])
+      self.username = ::SETTINGS['username']
+      self.client = RedditKit::Client.new(username, ::SETTINGS['password'])
     end
 
     def scan_hotlinks(subreddit)
