@@ -12,6 +12,7 @@ gem 'unicorn'
 gem 'capistrano-bundler'
 gem 'capistrano-rbenv', '~> 2.0'
 gem 'unirest'
+gem 'sanitize'
 
 group :test do
   gem 'rspec'

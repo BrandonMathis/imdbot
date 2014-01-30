@@ -41,7 +41,7 @@ module Imdbot
 <<-eos
 ##[#{imdb.title}](#{imdb.url}):
 
->#{plot}
+>#{Sanitize.clean(plot)}
 
 Metacritic Score: #{metacritic_score}
 

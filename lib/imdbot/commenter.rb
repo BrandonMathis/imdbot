@@ -11,7 +11,7 @@ module Imdbot
     def self.comment_with_movie_details(l)
       extract_movie_titles(l.title).each do |title|
         movie = Imdbot::Movie.new(title, l)
-        if ::SETTINGS['live'] = true
+        if ::SETTINGS['live'] == true
           comment(movie) if movie.confidence >= 80
         else
           post_to_file(movie) if movie.confidence >= 80
