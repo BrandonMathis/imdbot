@@ -1,11 +1,14 @@
+# encoding: UTF-8
+
 require 'spec_helper'
 
 describe Imdbot::Movie, :vcr do
   let(:settings) { YAML.load_file('config/settings.yml') }
   let(:client) { RedditKit::Client.new(settings['username'], settings['password']) }
-  let!(:reddit_link) { client.link('t3_1wdeb1') }
+  let(:movie_title) { "Star Wars" }
+  let(:reddit_link) { client.link('t3_1wdeb1') }
 
-  subject { Imdbot::Movie.new('Star Wars', reddit_link) }
+  subject { Imdbot::Movie.new(movie_title, reddit_link) }
 
   describe '#url' do
     let(:uri) { URI.parse(subject.url) }
@@ -18,6 +21,7 @@ describe Imdbot::Movie, :vcr do
   describe '#save_to_redis' do
     before do
       Imdbot::Movie.any_instance.stub(:redis_key).and_return("imdbot_test:imdbot:movies:#{SecureRandom.hex.to_s}")
+      Imdbot::Movie.any_instance.stub_chain(:comment, :full_name).and_return("Junk")
       subject.save_to_redis
     end
 
@@ -47,6 +51,24 @@ describe Imdbot::Movie, :vcr do
 
     it 'saves the if a comment was sent to reddit'
     it 'saves the link to the reddit comment'
+  end
+
+  describe '#imdb' do
+    let(:reddit_link) { client.link("t3_1wk6v2") }
+    let(:movie_title) { "Wall-E" }
+
+    it 'gives the title if there are utf-8 characters in title' do
+      subject.imdb.title.should == 'WALL·E'
+    end
+  end
+
+  describe '#metacritic' do
+    let(:reddit_link) { client.link("t3_1wk6v2") }
+    let(:movie_title) { "Wall-E" }
+
+    it 'gives the metacritic score' do
+      subject.metacritic['score'].should == '94'
+    end
   end
 
   describe '#to_comment' do

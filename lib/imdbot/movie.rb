@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Imdbot
   class Movie
     attr_accessor :title
@@ -29,7 +31,14 @@ module Imdbot
     end
 
     def metacritic
-      @metacritic ||= Unirest::post( "https://byroredux-metacritic.p.mashape.com/find/movie", headers: { "X-Mashape-Authorization" => ::SETTINGS['token'] }, parameters: { "title" => imdb.title.gsub(/\s\(\d+\)/, '') }).body['result']
+      @metacritic ||= Unirest::post( "https://byroredux-metacritic.p.mashape.com/find/movie",
+                                    headers: { "X-Mashape-Authorization" => ::SETTINGS['token'] },
+                                    parameters: { "title" => imdb.title }).body['result']
+      unless @metacritic
+        @metacritic = Unirest::post( "https://byroredux-metacritic.p.mashape.com/find/movie",
+                                      headers: { "X-Mashape-Authorization" => ::SETTINGS['token'] },
+                                      parameters: { "title" => cleanup(imdb.title) }).body['result']
+      end
     end
 
     def metacritic_score
@@ -39,6 +48,7 @@ module Imdbot
 
     def to_comment
 <<-eos
+##{reddit_link.title}
 ##[#{imdb.title}](#{imdb.url}):
 
 >#{Sanitize.clean(plot)}  
@@ -65,7 +75,7 @@ eos
     end
 
     def search_imdb_movies(query_string)
-      Imdb::Search.new(query_string).movies.first
+      Imdb::Movie.new(Imdb::Search.new(query_string).movies.first.id)
     end
 
     def confidence
@@ -82,6 +92,11 @@ eos
       confidence -= (title_words - imdb_title_words).size * 10
       confidence = 0 if confidence < 0
       confidence
+    end
+
+    private
+    def cleanup(title)
+      title.gsub(/·/, '-')
     end
   end
 end
