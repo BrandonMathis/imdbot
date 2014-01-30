@@ -1,5 +1,5 @@
 every 5.minutes do
-  rake 'scan_hotlinks[imdbot]'
+  rake 'watch_hotlinks[imdbot]'
 end
 
 every 5.minutes do
