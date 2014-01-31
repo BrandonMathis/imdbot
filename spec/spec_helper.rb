@@ -14,6 +14,7 @@ RSpec.configure do |c|
   c.treat_symbols_as_metadata_keys_with_true_values = true
 
   c.after(:each) do
+    Imdbot::Movie.any_instance.stub(:log)
     REDIS.keys('imdbot_test:*').each do |k|
       REDIS.del(k)
     end
