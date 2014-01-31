@@ -54,7 +54,7 @@ module Imdbot
             imdb = Imdb::Movie.new(match[1])
             if imdb.title
               confidence = Imdbot::Movie.confidence(imdb.title, link_title)
-              @@log.info "[#{keyword.cyan.underline}] (#{confidence.yellow+'%'}) #{imdb.title.red} #{link_title}"
+              @@log.info "[#{keyword.cyan.underline}] (#{confidence.to_s.yellow + '%'}) #{imdb.title.red} #{link_title}"
               return imdb if confidence > 50
             end
           end

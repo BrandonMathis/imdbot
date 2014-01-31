@@ -8,6 +8,7 @@ VCR.configure do |c|
   c.default_cassette_options = { :record => :new_episodes }
   c.configure_rspec_metadata!
   c.filter_sensitive_data('<PASSWORD>') { YAML.load_file('config/settings.yml')['password'] }
+  c.filter_sensitive_data('<TOKEN>') { YAML.load_file('config/settings.yml')['token'] }
 end
 
 RSpec.configure do |c|

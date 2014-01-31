@@ -1,193 +1,6 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://ssl.reddit.com/api/login
-    body:
-      encoding: UTF-8
-      string: api_type=json&passwd=<PASSWORD>&user=imdbot
-    headers:
-      User-Agent:
-      - Faraday v0.9.0
-      Content-Type:
-      - application/x-www-form-urlencoded
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - '*/*'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Wed, 29 Jan 2014 02:08:00 GMT
-      Connection:
-      - close
-      Content-Type:
-      - application/json; charset=UTF-8
-      Content-Length:
-      - '182'
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      Set-Cookie:
-      - reddit_session=25184710%2C2014-01-28T18%3A08%3A00%2C88e41f655717469d99c6bf661173737cf7931df1;
-        Domain=reddit.com; Path=/; HttpOnly
-      Server:
-      - '''; DROP TABLE servertypes; --'
-    body:
-      encoding: UTF-8
-      string: '{"json": {"errors": [], "data": {"modhash": "jswm0oktfe124da005e1004bfb23fa85814dd01639708d3984",
-        "cookie": "25184710,2014-01-28T18:08:00,88e41f655717469d99c6bf661173737cf7931df1"}}}'
-    http_version: 
-  recorded_at: Wed, 29 Jan 2014 02:08:01 GMT
-- request:
-    method: get
-    uri: http://www.reddit.com/user/imdbot/about.json
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.0
-      Cookie:
-      - reddit_session=25184710,2014-01-28T18:08:00,88e41f655717469d99c6bf661173737cf7931df1
-      X-Modhash:
-      - jswm0oktfe124da005e1004bfb23fa85814dd01639708d3984
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - '*/*'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=UTF-8
-      Content-Length:
-      - '357'
-      Cache-Control:
-      - no-cache
-      Pragma:
-      - no-cache
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      Server:
-      - '''; DROP TABLE servertypes; --'
-      Date:
-      - Wed, 29 Jan 2014 02:08:03 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"kind": "t2", "data": {"has_mail": false, "name": "imdbot", "is_friend":
-        false, "created": 1390814327.0, "modhash": "7sxaahj2is6837c45f6cfde9201933cda3f3ba655ce5eb4d09",
-        "created_utc": 1390785527.0, "link_karma": 1, "comment_karma": 0, "over_18":
-        false, "is_gold": false, "is_mod": false, "has_verified_email": false, "id":
-        "ezsna", "has_mod_mail": false}}'
-    http_version: 
-  recorded_at: Wed, 29 Jan 2014 02:08:04 GMT
-- request:
-    method: get
-    uri: http://www.reddit.com/api/info.json?id=t3_1wdeb1
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.0
-      Cookie:
-      - reddit_session=25184710,2014-01-28T18:08:00,88e41f655717469d99c6bf661173737cf7931df1
-      X-Modhash:
-      - jswm0oktfe124da005e1004bfb23fa85814dd01639708d3984
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - '*/*'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=UTF-8
-      Cache-Control:
-      - no-cache
-      Pragma:
-      - no-cache
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      Server:
-      - '''; DROP TABLE servertypes; --'
-      Vary:
-      - accept-encoding
-      Date:
-      - Wed, 29 Jan 2014 02:08:04 GMT
-      Content-Length:
-      - '4784'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"kind": "Listing", "data": {"modhash": "gya3ru3itl3ab1b789bd99dd81286690c202ccd623c163d8c3",
-        "children": [{"kind": "t3", "data": {"domain": "youtube.com", "banned_by":
-        null, "media_embed": {"content": "&lt;iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
-        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
-        "width": 600, "scrolling": false, "height": 338}, "subreddit": "movies", "selftext_html":
-        null, "selftext": "", "likes": null, "secure_media": {"type": "youtube.com",
-        "oembed": {"provider_url": "http://www.youtube.com/", "description": "CONAN
-        Highlight: Attention J.J. Abrams: nobody can pull off a dying tauntaun &amp;
-        Jabba like Bill Hader can. More CONAN @ http://teamcoco.com/video Team Coco
-        is the official YouTube channel of late night host Conan O''Brien, CONAN on
-        TBS &amp; TeamCoco.com.", "title": "Bill Hader''s Killer \"Star Wars\" Impressions",
-        "url": "http://www.youtube.com/watch?v=DfiP915CfiM", "type": "video", "author_name":
-        "Team Coco", "height": 338, "width": 600, "html": "&lt;iframe class=\"embedly-embed\"
-        src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
-        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
-        "thumbnail_width": 480, "version": "1.0", "provider_name": "YouTube", "thumbnail_url":
-        "https://i.embed.ly/1/image?url=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=b1e305db91cf4aa5a86b732cc9fffceb",
-        "thumbnail_height": 360, "author_url": "http://www.youtube.com/user/teamcoco"}},
-        "link_flair_text": "", "id": "1wdeb1", "secure_media_embed": {"content": "&lt;iframe
-        class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
-        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
-        "width": 600, "scrolling": false, "height": 338}, "clicked": false, "stickied":
-        false, "author": "powerzjim", "media": {"type": "youtube.com", "oembed": {"provider_url":
-        "http://www.youtube.com/", "description": "CONAN Highlight: Attention J.J.
-        Abrams: nobody can pull off a dying tauntaun &amp; Jabba like Bill Hader can.
-        More CONAN @ http://teamcoco.com/video Team Coco is the official YouTube channel
-        of late night host Conan O''Brien, CONAN on TBS &amp; TeamCoco.com.", "title":
-        "Bill Hader''s Killer \"Star Wars\" Impressions", "url": "http://www.youtube.com/watch?v=DfiP915CfiM",
-        "type": "video", "author_name": "Team Coco", "height": 338, "width": 600,
-        "html": "&lt;iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
-        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
-        "thumbnail_width": 480, "version": "1.0", "provider_name": "YouTube", "thumbnail_url":
-        "http://i1.ytimg.com/vi/DfiP915CfiM/hqdefault.jpg", "thumbnail_height": 360,
-        "author_url": "http://www.youtube.com/user/teamcoco"}}, "score": 2880, "approved_by":
-        null, "over_18": false, "hidden": false, "thumbnail": "http://d.thumbs.redditmedia.com/zyjTJaEFztDYnu6c.jpg",
-        "subreddit_id": "t5_2qh3s", "edited": false, "link_flair_css_class": "media",
-        "author_flair_css_class": null, "downs": 9680, "saved": false, "is_self":
-        false, "permalink": "/r/movies/comments/1wdeb1/bill_haders_killer_star_wars_impressions_on_conan/",
-        "name": "t3_1wdeb1", "created": 1390919827.0, "url": "http://www.youtube.com/watch?v=DfiP915CfiM",
-        "author_flair_text": null, "title": "Bill Hader''s killer \"Star Wars\" impressions
-        on Conan", "created_utc": 1390919827.0, "ups": 12560, "num_comments": 466,
-        "visited": false, "num_reports": null, "distinguished": null}}], "after":
-        null, "before": null}}'
-    http_version: 
-  recorded_at: Wed, 29 Jan 2014 02:08:04 GMT
-- request:
     method: get
     uri: http://akas.imdb.com/find?q=Star%20Wars%3Bs=tt
     body:
@@ -2606,4 +2419,191 @@ http_interactions:
         IDwvYm9keT4KPC9odG1sPgoK
     http_version: 
   recorded_at: Wed, 29 Jan 2014 02:08:07 GMT
+- request:
+    method: post
+    uri: https://ssl.reddit.com/api/login
+    body:
+      encoding: UTF-8
+      string: api_type=json&passwd=<PASSWORD>&user=imdbot
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 31 Jan 2014 18:34:12 GMT
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '182'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Set-Cookie:
+      - reddit_session=25184710%2C2014-01-31T10%3A34%3A12%2C035335ef7af21e4fd9cfd2d800088e3df763e4b5;
+        Domain=reddit.com; Path=/; HttpOnly
+      Server:
+      - '''; DROP TABLE servertypes; --'
+    body:
+      encoding: UTF-8
+      string: '{"json": {"errors": [], "data": {"modhash": "w9oky0phq954559eead23310a70c52a2783d3f2d92ec365dd4",
+        "cookie": "25184710,2014-01-31T10:34:12,035335ef7af21e4fd9cfd2d800088e3df763e4b5"}}}'
+    http_version: 
+  recorded_at: Fri, 31 Jan 2014 18:34:12 GMT
+- request:
+    method: get
+    uri: http://www.reddit.com/user/imdbot/about.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Cookie:
+      - reddit_session=25184710,2014-01-31T10:34:12,035335ef7af21e4fd9cfd2d800088e3df763e4b5
+      X-Modhash:
+      - w9oky0phq954559eead23310a70c52a2783d3f2d92ec365dd4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '357'
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - '''; DROP TABLE servertypes; --'
+      Date:
+      - Fri, 31 Jan 2014 18:34:13 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"kind": "t2", "data": {"has_mail": true, "name": "imdbot", "is_friend":
+        false, "created": 1390814327.0, "modhash": "3687zrcx0c29edeba35cd83a5d6565b8c24d149202772da9b7",
+        "created_utc": 1390785527.0, "link_karma": 1, "comment_karma": -1, "over_18":
+        false, "is_gold": false, "is_mod": false, "has_verified_email": false, "id":
+        "ezsna", "has_mod_mail": false}}'
+    http_version: 
+  recorded_at: Fri, 31 Jan 2014 18:34:13 GMT
+- request:
+    method: get
+    uri: http://www.reddit.com/api/info.json?id=t3_1wdeb1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Cookie:
+      - reddit_session=25184710,2014-01-31T10:34:12,035335ef7af21e4fd9cfd2d800088e3df763e4b5
+      X-Modhash:
+      - w9oky0phq954559eead23310a70c52a2783d3f2d92ec365dd4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - '''; DROP TABLE servertypes; --'
+      Vary:
+      - accept-encoding
+      Date:
+      - Fri, 31 Jan 2014 18:34:13 GMT
+      Content-Length:
+      - '4785'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"kind": "Listing", "data": {"modhash": "gw769ix55y9d7c7d6b611c17612550fda11cc6e69c915d49fd",
+        "children": [{"kind": "t3", "data": {"domain": "youtube.com", "banned_by":
+        null, "media_embed": {"content": "&lt;iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
+        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
+        "width": 600, "scrolling": false, "height": 338}, "subreddit": "movies", "selftext_html":
+        null, "selftext": "", "likes": null, "secure_media": {"type": "youtube.com",
+        "oembed": {"provider_url": "http://www.youtube.com/", "description": "CONAN
+        Highlight: Attention J.J. Abrams: nobody can pull off a dying tauntaun &amp;
+        Jabba like Bill Hader can. More CONAN @ http://teamcoco.com/video Team Coco
+        is the official YouTube channel of late night host Conan O''Brien, CONAN on
+        TBS &amp; TeamCoco.com.", "title": "Bill Hader''s Killer \"Star Wars\" Impressions",
+        "url": "http://www.youtube.com/watch?v=DfiP915CfiM", "type": "video", "author_name":
+        "Team Coco", "height": 338, "width": 600, "html": "&lt;iframe class=\"embedly-embed\"
+        src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
+        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
+        "thumbnail_width": 480, "version": "1.0", "provider_name": "YouTube", "thumbnail_url":
+        "https://i.embed.ly/1/image?url=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=b1e305db91cf4aa5a86b732cc9fffceb",
+        "thumbnail_height": 360, "author_url": "http://www.youtube.com/user/teamcoco"}},
+        "link_flair_text": "", "id": "1wdeb1", "secure_media_embed": {"content": "&lt;iframe
+        class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
+        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
+        "width": 600, "scrolling": false, "height": 338}, "clicked": false, "stickied":
+        false, "author": "powerzjim", "media": {"type": "youtube.com", "oembed": {"provider_url":
+        "http://www.youtube.com/", "description": "CONAN Highlight: Attention J.J.
+        Abrams: nobody can pull off a dying tauntaun &amp; Jabba like Bill Hader can.
+        More CONAN @ http://teamcoco.com/video Team Coco is the official YouTube channel
+        of late night host Conan O''Brien, CONAN on TBS &amp; TeamCoco.com.", "title":
+        "Bill Hader''s Killer \"Star Wars\" Impressions", "url": "http://www.youtube.com/watch?v=DfiP915CfiM",
+        "type": "video", "author_name": "Team Coco", "height": 338, "width": 600,
+        "html": "&lt;iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FDfiP915CfiM%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DDfiP915CfiM&amp;image=http%3A%2F%2Fi1.ytimg.com%2Fvi%2FDfiP915CfiM%2Fhqdefault.jpg&amp;key=522baf40bd3911e08d854040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube\"
+        width=\"600\" height=\"338\" scrolling=\"no\" frameborder=\"0\" allowfullscreen&gt;&lt;/iframe&gt;",
+        "thumbnail_width": 480, "version": "1.0", "provider_name": "YouTube", "thumbnail_url":
+        "http://i1.ytimg.com/vi/DfiP915CfiM/hqdefault.jpg", "thumbnail_height": 360,
+        "author_url": "http://www.youtube.com/user/teamcoco"}}, "score": 2814, "approved_by":
+        null, "over_18": false, "hidden": false, "thumbnail": "http://d.thumbs.redditmedia.com/zyjTJaEFztDYnu6c.jpg",
+        "subreddit_id": "t5_2qh3s", "edited": false, "link_flair_css_class": "media",
+        "author_flair_css_class": null, "downs": 11877, "saved": false, "is_self":
+        false, "permalink": "/r/movies/comments/1wdeb1/bill_haders_killer_star_wars_impressions_on_conan/",
+        "name": "t3_1wdeb1", "created": 1390919827.0, "url": "http://www.youtube.com/watch?v=DfiP915CfiM",
+        "author_flair_text": null, "title": "Bill Hader''s killer \"Star Wars\" impressions
+        on Conan", "created_utc": 1390919827.0, "ups": 14691, "num_comments": 523,
+        "visited": false, "num_reports": null, "distinguished": null}}], "after":
+        null, "before": null}}'
+    http_version: 
+  recorded_at: Fri, 31 Jan 2014 18:34:13 GMT
 recorded_with: VCR 2.8.0
