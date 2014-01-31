@@ -1,4 +1,3 @@
-env :MAILTO, settings = YAML.load_file('config/settings.yml')['email']
 set :output,  "log/cron.log"
 
 every 5.minutes do
