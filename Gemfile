@@ -13,6 +13,8 @@ gem 'capistrano-bundler'
 gem 'capistrano-rbenv', '~> 2.0'
 gem 'unirest'
 gem 'sanitize'
+gem 'colored'
+gem 'google-search'
 
 group :test do
   gem 'rspec'
