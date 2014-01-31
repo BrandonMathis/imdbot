@@ -8,9 +8,21 @@ module Imdbot
       self.client = RedditKit::Client.new(username, ::SETTINGS['password'])
     end
 
-    def scan_hotlinks
+    def scan_hot_links
+      scan_links 'hot'
+    end
+
+    def scan_rising_links
+      scan_links 'rising'
+    end
+
+    def scan_new_links
+      scan_links 'new'
+    end
+
+    def scan_links(cat)
       client.subreddits.each do |sr|
-        client.links(sr.name, category: 'rising', limit: 100).each do |l|
+        client.links(sr.name, category: cat, limit: 100).each do |l|
           unless REDIS.get(l.id)
             REDIS.set(l.id, l.url)
             Resque.enqueue(Imdbot::Commenter, l.full_name)
