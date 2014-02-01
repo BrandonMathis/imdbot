@@ -14,6 +14,7 @@ module Imdbot
         movie = Imdbot::Movie.new(imdb_object, l)
         if ::SETTINGS['live'] == true
           comment(movie)
+          sleep 4
         end
         movie.log @@log
       end

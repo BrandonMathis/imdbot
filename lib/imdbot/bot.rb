@@ -28,7 +28,9 @@ module Imdbot
             Resque.enqueue(Imdbot::Commenter, l.full_name)
           end
         end
+        sleep 4
       end
+      sleep 4
     end
   end
 end
