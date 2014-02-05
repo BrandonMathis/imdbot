@@ -76,10 +76,19 @@ describe Imdbot::Movie, :vcr do
 
   describe '#confidence' do
     let(:link_title) { "Has anyone seen the film Ways to Die in the West yet?" }
-    let(:imdb) { Imdb::Movie.new('2557490') }
+    let(:imdb_title) { "A Million Ways to Die in the West" }
 
     it 'gives confidence' do
-      Imdbot::Movie.confidence(imdb.title, link_title).should == 75.0
+      Imdbot::Movie.confidence(imdb_title, link_title).should == 75.0
+    end
+
+    context 'when Se7en' do
+      let(:link_title) { "What is *worst* casting choice you've ever seen in a movie?" }
+      let(:imdb_title) { 'Se7en' }
+
+      it 'gives confidence' do
+        Imdbot::Movie.confidence(imdb.title, link_title).should == 0
+      end
     end
   end
 end
