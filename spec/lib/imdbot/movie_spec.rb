@@ -87,7 +87,7 @@ describe Imdbot::Movie, :vcr do
       let(:imdb_title) { 'Se7en' }
 
       it 'gives confidence' do
-        Imdbot::Movie.confidence(imdb.title, link_title).should == 0
+        Imdbot::Movie.confidence(imdb_title, link_title).should == 0
       end
     end
   end
