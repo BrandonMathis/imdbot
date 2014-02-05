@@ -20,6 +20,12 @@ module Imdbot
       scan_links 'new'
     end
 
+    def scan_movie_links
+      client.links('movies', category: 'hot', limit: 10).each do |l|
+        Resque.enqueue(Imdbot::Commenter, l.full_name)
+      end
+    end
+
     def scan_links(cat)
       client.subreddits.each do |sr|
         client.links(sr.name, category: cat, limit: 100).each do |l|
@@ -28,9 +34,9 @@ module Imdbot
             Resque.enqueue(Imdbot::Commenter, l.full_name)
           end
         end
-        sleep 4
+        sleep 1
       end
-      sleep 4
+      sleep 1
     end
   end
 end

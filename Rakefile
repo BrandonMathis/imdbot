@@ -11,3 +11,7 @@ end
 task :start_deleter do
   Imdbot::Deleter.new.scan
 end
+
+task :get_movie_links do
+  Imdbot::Bot.new.scan_movie_links
+end
