@@ -10,7 +10,7 @@ module Imdbot
     end
 
     def self.comment_with_movie_details(l)
-      if imdb_object = imdb(l.title)
+      if imdb_object = extract_film(l.title)
         movie = Imdbot::Movie.new(imdb_object, l)
         if ::SETTINGS['live'] == true
           comment(movie)
@@ -46,7 +46,7 @@ module Imdbot
       movie_titles.select { |title| title =~ /[A-Z]+/ }
     end
 
-    def self.imdb(link_title)
+    def self.extract_film(link_title)
       imdb_regex = /imdb\.com\/title\/tt([0-9]{7})\//
       if keyword = contains_keywords(link_title)
         Google::Search::Web.new(query: "#{link_title} site:imdb.com -Review" ).each do |q|
