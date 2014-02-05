@@ -2,6 +2,8 @@
 
 module Imdbot
   class Movie
+    STARS = %w(☆ ☆ ☆ ☆ ☆ ☆ ☆ ☆ ☆ ☆)
+
     attr_accessor :title
     attr_accessor :reddit_link
     attr_accessor :comment
@@ -44,7 +46,7 @@ module Imdbot
     end
 
     def metacritic_score
-      return "[#{metacritic['score']}](#{metacritic['url']})" if metacritic
+      return "[#{metacritic['score']}](#{metacritic['url']})" if metacritic && metacritic['score'] != ''
       '*not found*'
     end
 
@@ -58,15 +60,50 @@ module Imdbot
       @url ||= imdb.url
     end
 
+    def cast_members_list
+      ids = imdb.cast_member_ids
+      imdb.cast_members[0..5].map.with_index do |member, i|
+        "* [#{member}](http://www.imdb.com/name/#{ids[i]})"
+      end.join('\n')
+    end
+
+    def cast_members
+      @cast_members ||= imdb.cast_members
+    end
+
+    def cast_member_ids
+      @cast_member_ids ||= imdb.cast_member_ids
+    end
+
+    def cast
+      (0..5).map do |i|
+        "* [#{cast_members[i]}](http://www.imdb.com/name/#{cast_member_ids[i]})  " if cast_members[i]
+      end.join("\n")
+    end
+
+    def rating
+      if imdb.rating
+        stars = STARS.map.with_index { |x,i| (i+1 < imdb.rating)? '★' : x}.join(' ')
+        "(#{imdb.rating}/100) #{stars}"
+      else
+        "*none*"
+      end
+    end
+
     def to_comment
 <<-eos
-##{reddit_link.title}
 ##[#{imdb.title}](#{imdb.url}):
+**Directed By:** #{imdb.director.join(' & ')}
+*#{imdb.genres.join(' ')}*
 
+####Plot
 >#{Sanitize.clean(plot)}  
->[Poster](#{imdb.poster})
+>[Trailer](#{imdb.trailer_url})
+####Cast
+#{cast}
 
-Metacritic Score: #{metacritic_score}
+Metacritic Score: #{metacritic_score}/**100**  
+IMDB Rating: #{rating}  
 
 *Will delete on comment score of -1 or less*  
 eos
