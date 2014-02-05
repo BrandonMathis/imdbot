@@ -6,8 +6,8 @@ describe Imdbot::Bot do
     Imdbot::Commenter.class_variable_set :@@log, Logger.new('log/test.log')
   end
 
-  describe '.imdb', :vcr do
-    let(:imdb_object) { Imdbot::Commenter.imdb(link_title) }
+  describe '.extract_film', :vcr do
+    let(:imdb_object) { Imdbot::Commenter.extract_film(link_title) }
 
     context 'with keyword' do
       describe 'Movie' do
