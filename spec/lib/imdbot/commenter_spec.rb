@@ -11,10 +11,10 @@ describe Imdbot::Bot do
 
     context 'with keyword' do
       describe 'Movie' do
-        let(:link_title) { 'Has anyone see the Movie Inception' }
+        let(:link_title) { 'Has anyone see the Movie Dawn of the Planet of the Apes' }
 
         it 'gives the movie title' do
-          imdb_object.url.should == "http://akas.imdb.com/title/tt1375666/combined"
+          imdb_object.url.should == "http://akas.imdb.com/title/tt2103281/combined"
         end
       end
 
@@ -35,7 +35,7 @@ describe Imdbot::Bot do
       end
 
       describe 'Flick' do
-        let(:link_title) { "Has anyone seen the Christopher Nolan flick Interstellar" }
+        let(:link_title) { "When do you think the Christopher Nolan flick Interstellar will be released?" }
 
         it 'gives the movie title' do
           imdb_object.url.should == "http://akas.imdb.com/title/tt0816692/combined"

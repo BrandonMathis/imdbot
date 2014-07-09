@@ -48,19 +48,13 @@ module Imdbot
     end
 
     def self.extract_film(link_title)
+      return false unless contains_keywords(link_title)
       imdb_regex = /imdb\.com\/title\/tt([0-9]{7})\//
-      if keyword = contains_keywords(link_title)
-        Google::Search::Web.new(query: "#{link_title} site:imdb.com -Review" ).each do |q|
-          match = q.uri.match(imdb_regex)
-          if q.uri =~ imdb_regex
-            imdb = Imdb::Movie.new(match[1])
-            if imdb.title
-              ap "Try: '#{imdb.title}'"
-              confidence = Imdbot::Movie.confidence(imdb.title, link_title)
-              return imdb if confidence > 50
-            end
-          end
-        end
+      Imdb::Search.new(link_title).movies.first(10).each do |imdb_search_result|
+        imdb = Imdb::Movie.new(imdb_search_result.id)
+        confidence = Imdbot::Movie.confidence(imdb.title, link_title)
+        puts "[#{confidence}% confidence] Try: '#{imdb.title}' "
+        return imdb if confidence > 70
       end
       return false
     end
