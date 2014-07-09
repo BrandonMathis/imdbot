@@ -10,7 +10,7 @@ Fun while it lasted, worked pretty well, I moved on to more interesting projects
 Feel free to fork and run if you want :)
 
 ##How To Run
-Get a [Reddit API Key](http://www.reddit.com/dev/api) AND READ THE ACCESS RULE!!!!!
+Get a [Reddit API Key](http://www.reddit.com/dev/api) AND READ THE ACCESS RULES!!!!!
 ###Start Resqueue
 ```
 $ TERM_CHILD=1 QUEUES="imdbot" rake resque:work
