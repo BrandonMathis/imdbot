@@ -1,6 +1,6 @@
 source 'https://rubygems.org' 
 
-gem 'redditkit', git: 'git@github.com:BrandonMathis/RedditKit.rb.git', branch: 'faraday_fix'
+gem 'redditkit'#, git: 'git@github.com:BrandonMathis/RedditKit.rb.git', branch: 'faraday_fix'
 gem 'redis'
 gem 'imdb'
 gem 'resque'

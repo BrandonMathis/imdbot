@@ -47,6 +47,12 @@ describe Imdbot::Bot do
 
         it 'gives the movie title'
       end
+
+      context 'with partials of keywords' do
+        let(:link_title) { 'This sign says "Flicker" but looks like something else.' }
+
+        it 'doesnt pickup the keyword'
+      end
     end
 
     context 'without keywords' do

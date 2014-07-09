@@ -1,0 +1,12 @@
+# The Bot's Reddit Username
+username:
+# The Bot's Reddit Password
+password:
+# The Bot's Logfile location
+log:
+# The Bot's email address
+email:
+# Reddit API Token
+token:
+# DO NOT SET THIS TO TRUE!!!! IT WILL POST COMMENTS TO REDDIT
+live: false

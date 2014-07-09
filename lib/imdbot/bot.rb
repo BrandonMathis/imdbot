@@ -1,5 +1,7 @@
 module Imdbot
   class Bot
+    QUEUE_NAME = 'imdbot'
+
     attr_accessor :username
     attr_accessor :client
 
@@ -21,22 +23,30 @@ module Imdbot
     end
 
     def scan_movie_links
-      client.links('movies', category: 'hot', limit: 10).each do |l|
-        Resque.enqueue(Imdbot::Commenter, l.full_name)
+      client.links('movies', category: 'hot', limit: 50).each do |l|
+        queue l
       end
     end
+
 
     def scan_links(cat)
       client.subreddits.each do |sr|
         client.links(sr.name, category: cat, limit: 100).each do |l|
-          unless REDIS.get(l.id)
-            REDIS.set(l.id, l.url)
-            Resque.enqueue(Imdbot::Commenter, l.full_name)
-          end
+          queue l
         end
-        sleep 1
+        sleep 2.5
       end
-      sleep 1
+      sleep 5
+    end
+
+    # Queue the reddit link with info in redis
+    # Also make record of link ID so we dont make duplicate jobs for a single link
+    def queue(l)
+      unless REDIS.get(l.id)
+        REDIS.set(l.id, l.url)
+        REDIS.expire(l.id, 86400 * 3) # Expire in 3 days (in seconds)
+        Resque.enqueue_to(QUEUE_NAME, Imdbot::Commenter, l.full_name)
+      end
     end
   end
 end
