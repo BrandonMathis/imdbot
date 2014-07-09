@@ -45,7 +45,7 @@ module Imdbot
       unless REDIS.get(l.id)
         REDIS.set(l.id, l.url)
         REDIS.expire(l.id, 86400 * 3) # Expire in 3 days (in seconds)
-        Resque.enqueue_to(QUEUE_NAME, Imdbot::Commenter, l.full_name)
+        Resque.enqueue(Imdbot::Commenter, l.full_name)
       end
     end
   end
