@@ -125,8 +125,6 @@ eos
     def self.confidence(imdb_title, link_title)
       imdb_title_words = imdb_title.gsub(/[^a-z0-9\s]/i, '').downcase.split
       link_title_words = link_title.gsub(/[^a-z0-9\s]/i, '').downcase.split & imdb_title_words
-      ap imdb_title_words
-      ap link_title_words
       link_title_words.count.to_f / imdb_title_words.count.to_f * 100
     end
 

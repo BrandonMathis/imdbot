@@ -10,6 +10,7 @@ module Imdbot
     end
 
     def self.comment_with_movie_details(l)
+      ap l.title
       if imdb_object = extract_film(l.title)
         movie = Imdbot::Movie.new(imdb_object, l)
         if ::SETTINGS['live'] == true
@@ -54,6 +55,7 @@ module Imdbot
           if q.uri =~ imdb_regex
             imdb = Imdb::Movie.new(match[1])
             if imdb.title
+              ap "Try: '#{imdb.title}'"
               confidence = Imdbot::Movie.confidence(imdb.title, link_title)
               return imdb if confidence > 50
             end
