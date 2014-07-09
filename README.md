@@ -1,9 +1,9 @@
 imdbot
 ======
 
-Reddit Bot that scans /new links for potential movie related discussion. Then comments with Movie descriptions and reviews from IMDB.
+Reddit Bot that scans /new links for potential movie related discussion. Then comments with Movie descriptions from imdb and reviews from Metacritic.
 
-:skull: Dead :skull:
+:skull: Dead :skull: See [Movieguide bot](http://www.reddit.com/user/MovieGuide)
 
 Fun while it lasted, worked pretty well, I moved on to more interesting projects.
 
